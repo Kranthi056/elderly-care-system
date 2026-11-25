@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments/layout :: head('Register - Elderly')}"></head>
+<body>
+<nav th:replace="~{fragments/layout :: public-nav}"></nav>
+<section class="section">
+    <div class="card" style="max-width:640px;margin:0 auto;">
+        <h2 style="text-align:center;margin-bottom:0.4rem;">Register as Elderly / Family</h2>
+        <p style="text-align:center;color:var(--text-muted);margin-bottom:1.5rem;">Create an account to request care services</p>
+        <div th:if="${error}" class="alert alert-error" th:text="${error}"></div>
+        <form th:action="@{/register/elderly}" method="post">
+            <div class="form-row">
+                <div class="form-group"><label class="required">Full Name</label><input type="text" name="fullName" class="form-control" required></div>
+                <div class="form-group"><label class="required">Email</label><input type="email" name="email" class="form-control" required></div>
+            </div>
+            <div class="form-row">
+                <div class="form-group"><label class="required">Password</label><input type="password" name="password" class="form-control" required minlength="6"></div>
+                <div class="form-group"><label>Phone</label><input type="tel" name="phone" class="form-control"></div>
+            </div>
+            <div class="form-group"><label>Address</label><input type="text" name="address" class="form-control"></div>
+            <div class="form-row">
+                <div class="form-group"><label>City</label><input type="text" name="city" class="form-control"></div>
+                <div class="form-group"><label>State</label><input type="text" name="state" class="form-control"></div>
+            </div>
+            <div class="form-row">
+                <div class="form-group"><label>Emergency Contact Name</label><input type="text" name="emergencyContactName" class="form-control"></div>
+                <div class="form-group"><label>Emergency Contact Phone</label><input type="tel" name="emergencyContactPhone" class="form-control"></div>
+            </div>
+            <button type="submit" class="btn btn-primary w-100 btn-lg">Register</button>
+        </form>
+        <p class="text-center mt-2">Already have an account? <a th:href="@{/login}">Login</a></p>
+    </div>
+</section>
+<footer th:replace="~{fragments/layout :: footer}"></footer>
+</body>
+</html>

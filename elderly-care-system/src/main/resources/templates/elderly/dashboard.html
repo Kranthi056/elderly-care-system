@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments/layout :: head('Dashboard')}"></head>
+<body>
+<div class="dashboard-layout">
+    <aside class="sidebar" th:replace="~{fragments/elderly-sidebar :: sidebar}"></aside>
+    <main class="main-content">
+        <div class="topbar">
+            <div>
+                <h1>Welcome back, <span th:text="${user.fullName}">User</span></h1>
+                <div class="breadcrumb">Home / Dashboard — your care at a glance</div>
+            </div>
+            <div class="topbar-actions">
+                <a th:href="@{/elderly/request}" class="btn btn-primary btn-sm"><i class="fas fa-plus"></i> New Request</a>
+                <a th:href="@{/elderly/notifications}" style="position:relative;font-size:1.35rem;color:var(--text);">
+                    <i class="fas fa-bell"></i>
+                    <span th:if="${unreadCount > 0}" class="badge-notif" th:text="${unreadCount}"></span>
+                </a>
+            </div>
+        </div>
+        <div th:if="${message}" class="alert alert-success"><i class="fas fa-check-circle"></i> <span th:text="${message}"></span></div>
+
+        <div class="grid-4 mb-3">
+            <div class="stat-card">
+                <i class="fas fa-clipboard-list"></i>
+                <div class="stat-value" th:text="${requests != null ? #lists.size(requests) : 0}">0</div>
+                <div class="stat-label">Service Requests</div>
+            </div>
+            <div class="stat-card" style="border-left-color:var(--info);">
+                <i class="fas fa-user-nurse" style="color:var(--info);"></i>
+                <div class="stat-value" th:text="${assignments != null ? #lists.size(assignments) : 0}">0</div>
+                <div class="stat-label">Care Assignments</div>
+            </div>
+            <div class="stat-card" style="border-left-color:var(--secondary);">
+                <i class="fas fa-bell" style="color:var(--secondary);"></i>
+                <div class="stat-value" th:text="${unreadCount}">0</div>
+                <div class="stat-label">Unread Alerts</div>
+            </div>
+            <div class="stat-card" style="border-left-color:var(--accent);">
+                <i class="fas fa-check-circle" style="color:var(--accent);"></i>
+                <div class="stat-value" th:text="${user.profileCompleted ? 'Ready' : 'Setup'}">Ready</div>
+                <div class="stat-label">Profile Status</div>
+            </div>
+        </div>
+
+        <div class="grid-3">
+            <div class="card">
+                <div class="d-flex justify-between align-center mb-2">
+                    <h3><i class="fas fa-clipboard-list" style="color:var(--primary);"></i> Recent Requests</h3>
+                    <a th:href="@{/elderly/requests}" style="font-size:0.85rem;">View all</a>
+                </div>
+                <div th:if="${#lists.isEmpty(requests)}" class="empty-state">
+                    <i class="fas fa-inbox"></i>
+                    <p>No requests yet.</p>
+                    <a th:href="@{/elderly/request}" class="btn btn-primary btn-sm mt-1">Request a Service</a>
+                </div>
+                <div th:each="r : ${requests}" style="padding:0.7rem 0;border-bottom:1px solid var(--border);">
+                    <div class="d-flex justify-between align-center">
+                        <strong th:text="${r.service.name}"></strong>
+                        <span class="badge" th:classappend="'badge-' + ${#strings.toLowerCase(r.status.name())}" th:text="${r.status}"></span>
+                    </div>
+                    <small class="text-muted" th:text="${r.preferredDate} + ' · ' + ${r.location}"></small>
+                </div>
+            </div>
+            <div class="card">
+                <div class="d-flex justify-between align-center mb-2">
+                    <h3><i class="fas fa-calendar-check" style="color:var(--primary);"></i> Upcoming Visits</h3>
+                    <a th:href="@{/elderly/schedule}" style="font-size:0.85rem;">Schedule</a>
+                </div>
+                <div th:if="${#lists.isEmpty(assignments)}" class="empty-state">
+                    <i class="fas fa-calendar"></i>
+                    <p>No scheduled visits.</p>
+                </div>
+                <div th:each="a : ${assignments}" style="padding:0.7rem 0;border-bottom:1px solid var(--border);">
+                    <div class="d-flex justify-between align-center">
+                        <strong th:text="${a.caregiver.fullName}"></strong>
+                        <span class="badge" th:classappend="'badge-' + ${#strings.toLowerCase(a.status.name())}" th:text="${a.status}"></span>
+                    </div>
+                    <small class="text-muted" th:text="${a.serviceRequest.service.name} + ' · ' + ${a.scheduledDate} + ' at ' + ${a.scheduledTime}"></small>
+                </div>
+            </div>
+            <div class="card">
+                <h3 class="mb-2"><i class="fas fa-phone-alt" style="color:var(--primary);"></i> Emergency Contact</h3>
+                <div th:if="${profile != null and profile.emergencyContactName != null}">
+                    <p class="fw-bold" th:text="${profile.emergencyContactName}">Name</p>
+                    <p class="text-muted" th:text="${profile.emergencyContactPhone}">Phone</p>
+                    <p class="text-muted" th:text="${profile.emergencyContactRelation}">Relation</p>
+                    <a th:href="@{/elderly/medical}" class="btn btn-secondary btn-sm mt-2">Update Medical Info</a>
+                </div>
+                <div th:if="${profile == null or profile.emergencyContactName == null}" class="empty-state">
+                    <i class="fas fa-user-plus"></i>
+                    <p>Add an emergency contact in Medical Info.</p>
+                    <a th:href="@{/elderly/medical}" class="btn btn-primary btn-sm mt-1">Add Now</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="card mt-3" style="background:linear-gradient(135deg,var(--primary-light),#fff);border:1px solid rgba(42,157,143,0.2);">
+            <div class="d-flex align-center gap-2" style="flex-wrap:wrap;">
+                <i class="fas fa-lightbulb" style="font-size:1.5rem;color:var(--primary);"></i>
+                <div>
+                    <strong>Tip:</strong> Keep your medical information and emergency contacts up to date so caregivers can support you safely.
+                    <a th:href="@{/elderly/medical}">Update medical profile →</a>
+                </div>
+            </div>
+        </div>
+    </main>
+</div>
+</body>
+</html>

@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments/layout :: head('Services')}"></head>
+<body>
+<nav th:replace="~{fragments/layout :: public-nav}"></nav>
+<section class="section">
+    <h1 class="section-title">Our Services</h1>
+    <p class="section-subtitle">Comprehensive care options designed around comfort, independence, and wellbeing.</p>
+    <div class="grid-3">
+        <div class="card card-3d service-card" th:each="s : ${services}">
+            <div class="icon-wrap"><i th:class="'fas ' + ${s.iconClass}"></i></div>
+            <h3 th:text="${s.name}">Service</h3>
+            <p th:text="${s.description}">Description</p>
+            <p th:if="${s.basePrice}" style="font-weight:600;color:var(--primary);">From $<span th:text="${s.basePrice}"></span></p>
+            <div class="btn-group" style="justify-content:center;margin-top:1rem;">
+                <a th:href="@{/register}" class="btn btn-primary btn-sm">Request Service</a>
+            </div>
+        </div>
+    </div>
+</section>
+<footer th:replace="~{fragments/layout :: footer}"></footer>
+</body>
+</html>

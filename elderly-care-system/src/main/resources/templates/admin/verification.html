@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments/layout :: head('Caregiver Verification')}"></head>
+<body>
+<div class="dashboard-layout">
+    <aside th:replace="~{fragments/admin-sidebar :: sidebar}"></aside>
+    <main class="main-content">
+        <div class="topbar"><h1>Caregiver Verification</h1></div>
+        <div th:if="${message}" class="alert alert-success" th:text="${message}"></div>
+        <h3 style="margin-bottom:1rem;">Pending Applications</h3>
+        <div class="table-wrap mb-3">
+            <table>
+                <thead><tr><th>Name</th><th>Qualifications</th><th>Experience</th><th>Skills</th><th>Actions</th></tr></thead>
+                <tbody>
+                <tr th:each="c : ${pending}">
+                    <td th:text="${c.user.fullName}"></td>
+                    <td th:text="${c.qualifications}"></td>
+                    <td th:text="${c.yearsOfExperience}"></td>
+                    <td th:text="${c.skills}"></td>
+                    <td>
+                        <form th:action="@{/admin/verification/{id}/approve(id=${c.id})}" method="post" style="display:inline;">
+                            <button class="btn btn-success btn-sm">Approve</button>
+                        </form>
+                        <form th:action="@{/admin/verification/{id}/reject(id=${c.id})}" method="post" style="display:inline;">
+                            <input type="hidden" name="reason" value="Does not meet requirements">
+                            <button class="btn btn-danger btn-sm" onclick="return confirm('Reject this application?')">Reject</button>
+                        </form>
+                    </td>
+                </tr>
+                <tr th:if="${#lists.isEmpty(pending)}"><td colspan="5" class="text-center" style="padding:1.5rem;">No pending applications.</td></tr>
+                </tbody>
+            </table>
+        </div>
+    </main>
+</div>
+</body>
+</html>

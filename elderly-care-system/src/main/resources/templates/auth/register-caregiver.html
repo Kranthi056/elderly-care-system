@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments/layout :: head('Register - Caregiver')}"></head>
+<body>
+<nav th:replace="~{fragments/layout :: public-nav}"></nav>
+<section class="section">
+    <div class="card" style="max-width:640px;margin:0 auto;">
+        <h2 style="text-align:center;margin-bottom:0.4rem;">Register as Caregiver</h2>
+        <p style="text-align:center;color:var(--text-muted);margin-bottom:1.5rem;">Join our network of trusted care professionals</p>
+        <div th:if="${error}" class="alert alert-error" th:text="${error}"></div>
+        <form th:action="@{/register/caregiver}" method="post">
+            <div class="form-row">
+                <div class="form-group"><label class="required">Full Name</label><input type="text" name="fullName" class="form-control" required></div>
+                <div class="form-group"><label class="required">Email</label><input type="email" name="email" class="form-control" required></div>
+            </div>
+            <div class="form-row">
+                <div class="form-group"><label class="required">Password</label><input type="password" name="password" class="form-control" required minlength="6"></div>
+                <div class="form-group"><label>Phone</label><input type="tel" name="phone" class="form-control"></div>
+            </div>
+            <div class="form-group"><label>Qualifications</label><input type="text" name="qualifications" class="form-control" placeholder="e.g. CNA, First Aid"></div>
+            <div class="form-row">
+                <div class="form-group"><label>Years of Experience</label><input type="number" name="yearsOfExperience" class="form-control" min="0"></div>
+                <div class="form-group"><label>Hourly Rate ($)</label><input type="number" name="hourlyRate" class="form-control" step="0.01"></div>
+            </div>
+            <div class="form-group"><label>Skills</label><input type="text" name="skills" class="form-control" placeholder="Medication, Mobility, Meals..."></div>
+            <div class="form-group"><label>Service Locations</label><input type="text" name="serviceLocations" class="form-control"></div>
+            <div class="form-group"><label>Availability</label><input type="text" name="availability" class="form-control" placeholder="e.g. Mon-Fri 9-5"></div>
+            <button type="submit" class="btn btn-primary w-100 btn-lg">Register</button>
+        </form>
+        <p class="text-center mt-2">Already have an account? <a th:href="@{/login}">Login</a></p>
+    </div>
+</section>
+<footer th:replace="~{fragments/layout :: footer}"></footer>
+</body>
+</html>

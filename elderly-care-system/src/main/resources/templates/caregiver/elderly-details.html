@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments/layout :: head('Elderly Details')}"></head>
+<body>
+<div class="dashboard-layout">
+    <aside th:replace="~{fragments/caregiver-sidebar :: sidebar}"></aside>
+    <main class="main-content">
+        <div class="topbar"><h1>Assigned Elderly Details</h1></div>
+        <div class="card" style="max-width:600px;" th:if="${elderly != null}">
+            <h2 th:text="${elderly.fullName}"></h2>
+            <p><strong>Phone:</strong> <span th:text="${elderly.phone}"></span></p>
+            <p><strong>Address:</strong> <span th:text="${elderly.address} + ', ' + ${elderly.city}"></span></p>
+            <div th:if="${profile != null}" style="margin-top:1.2rem;">
+                <h3 style="color:var(--primary);margin-bottom:0.6rem;">Medical Information</h3>
+                <p><strong>Conditions:</strong> <span th:text="${profile.healthConditions}"></span></p>
+                <p><strong>Allergies:</strong> <span th:text="${profile.allergies}"></span></p>
+                <p><strong>Medications:</strong> <span th:text="${profile.currentMedications}"></span></p>
+                <p><strong>Preferences:</strong> <span th:text="${profile.carePreferences}"></span></p>
+                <p><strong>Emergency:</strong> <span th:text="${profile.emergencyContactName} + ' (' + ${profile.emergencyContactPhone} + ')'"></span></p>
+            </div>
+            <a th:href="@{/caregiver/assignments}" class="btn btn-secondary mt-2">Back</a>
+        </div>
+    </main>
+</div>
+</body>
+</html>

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments/layout :: head('Messages')}"></head>
+<body>
+<div class="dashboard-layout">
+    <aside th:replace="~{fragments/elderly-sidebar :: sidebar}"></aside>
+    <main class="main-content">
+        <div class="topbar">
+            <div>
+                <h1>Messages</h1>
+                <div class="breadcrumb">Communicate with your caregiver and care team</div>
+            </div>
+        </div>
+        <div class="grid-2">
+            <div class="card" style="padding:0;overflow:hidden;">
+                <div style="padding:1rem 1.2rem;background:var(--bg-alt);border-bottom:1px solid var(--border);font-weight:700;">Conversations</div>
+                <div style="padding:1rem 1.2rem;border-bottom:1px solid var(--border);cursor:pointer;background:var(--primary-light);">
+                    <strong>Sarah Mitchell</strong>
+                    <p class="text-muted" style="font-size:0.88rem;margin-top:0.2rem;">Your assigned caregiver · Last message today</p>
+                </div>
+                <div style="padding:1rem 1.2rem;border-bottom:1px solid var(--border);cursor:pointer;">
+                    <strong>ElderCare Support</strong>
+                    <p class="text-muted" style="font-size:0.88rem;margin-top:0.2rem;">Welcome message · 2 days ago</p>
+                </div>
+            </div>
+            <div class="card" style="display:flex;flex-direction:column;min-height:380px;">
+                <div style="padding-bottom:0.8rem;border-bottom:1px solid var(--border);margin-bottom:1rem;">
+                    <strong>Sarah Mitchell</strong>
+                    <span class="badge badge-approved" style="margin-left:0.5rem;">Caregiver</span>
+                </div>
+                <div style="flex:1;overflow-y:auto;">
+                    <div style="background:var(--bg-alt);padding:0.8rem 1rem;border-radius:12px;margin-bottom:0.8rem;max-width:85%;">
+                        <p>Hello Margaret, I’ll be visiting on Thursday at 9 AM for medication assistance. Looking forward to meeting you.</p>
+                        <small class="text-muted">Sarah · Today 08:12</small>
+                    </div>
+                    <div style="background:var(--primary-light);padding:0.8rem 1rem;border-radius:12px;margin-bottom:0.8rem;max-width:85%;margin-left:auto;">
+                        <p>Thank you Sarah. Please use the side entrance. My son Robert will be home.</p>
+                        <small class="text-muted">You · Today 08:30</small>
+                    </div>
+                </div>
+                <div style="display:flex;gap:0.6rem;margin-top:1rem;padding-top:1rem;border-top:1px solid var(--border);">
+                    <input type="text" class="form-control" placeholder="Type a message..." style="flex:1;">
+                    <button class="btn btn-primary" type="button" onclick="alert('Message sent (demo). Full messaging is available after assignment.')"><i class="fas fa-paper-plane"></i></button>
+                </div>
+            </div>
+        </div>
+        <p class="text-muted mt-2" style="font-size:0.88rem;"><i class="fas fa-info-circle"></i> Messaging becomes fully active once a caregiver is assigned to your request.</p>
+    </main>
+</div>
+</body>
+</html>

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments/layout :: head('About Us')}"></head>
+<body>
+<nav th:replace="~{fragments/layout :: public-nav}"></nav>
+<section class="section">
+    <h1 class="section-title">About ElderCare</h1>
+    <p class="section-subtitle">Bringing dignity, comfort, and reliable support to elderly individuals and the families who love them.</p>
+
+    <div class="card mb-3" style="max-width:820px;margin-left:auto;margin-right:auto;">
+        <h2 style="margin-bottom:0.9rem;color:var(--primary);">Our Mission</h2>
+        <p>To connect elderly individuals with compassionate, qualified caregivers through a simple, transparent platform that makes quality care easy to find, manage, and monitor — so families can focus on what matters most.</p>
+    </div>
+    <div class="card mb-3" style="max-width:820px;margin-left:auto;margin-right:auto;">
+        <h2 style="margin-bottom:0.9rem;color:var(--primary);">Our Vision</h2>
+        <p>A world where every elderly person receives the care, respect, and companionship they deserve, supported by technology that brings families and caregivers together with clarity and trust.</p>
+    </div>
+
+    <div class="grid-3" style="margin-top:2rem;">
+        <div class="card">
+            <h3><i class="fas fa-bullseye" style="color:var(--primary);"></i> Objectives</h3>
+            <ul style="margin-top:0.9rem;padding-left:1.2rem;color:var(--text-muted);line-height:1.8;">
+                <li>Simplify caregiver discovery</li>
+                <li>Improve care coordination</li>
+                <li>Enable transparent progress tracking</li>
+                <li>Support families with real-time updates</li>
+            </ul>
+        </div>
+        <div class="card">
+            <h3><i class="fas fa-hands-helping" style="color:var(--primary);"></i> Why It Matters</h3>
+            <p style="margin-top:0.9rem;color:var(--text-muted);">Ageing populations need reliable support. Many families struggle to find trusted help and stay informed about daily care. ElderCare closes that gap with one organized platform.</p>
+        </div>
+        <div class="card">
+            <h3><i class="fas fa-heart" style="color:var(--primary);"></i> Our Commitment</h3>
+            <p style="margin-top:0.9rem;color:var(--text-muted);">We prioritize safety, dignity, and accessibility — designing every feature with elderly users and their families in mind, from large readable text to clear status labels.</p>
+        </div>
+    </div>
+</section>
+<footer th:replace="~{fragments/layout :: footer}"></footer>
+</body>
+</html>

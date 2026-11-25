@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments/layout :: head('Manage Services')}"></head>
+<body>
+<div class="dashboard-layout">
+    <aside th:replace="~{fragments/admin-sidebar :: sidebar}"></aside>
+    <main class="main-content">
+        <div class="topbar"><h1>Manage Care Services</h1></div>
+        <div th:if="${message}" class="alert alert-success" th:text="${message}"></div>
+        <div class="card mb-3" style="max-width:500px;">
+            <h3 style="margin-bottom:1rem;">Add New Service</h3>
+            <form th:action="@{/admin/services/add}" method="post">
+                <div class="form-group"><label>Name</label><input type="text" name="name" class="form-control" required></div>
+                <div class="form-group"><label>Description</label><textarea name="description" class="form-control" required></textarea></div>
+                <div class="form-row">
+                    <div class="form-group"><label>Icon Class</label><input type="text" name="iconClass" class="form-control" placeholder="fa-heart"></div>
+                    <div class="form-group"><label>Base Price</label><input type="number" name="basePrice" step="0.01" class="form-control"></div>
+                </div>
+                <button type="submit" class="btn btn-primary">Add Service</button>
+            </form>
+        </div>
+        <div class="table-wrap">
+            <table>
+                <thead><tr><th>Name</th><th>Description</th><th>Price</th><th>Active</th><th>Action</th></tr></thead>
+                <tbody>
+                <tr th:each="s : ${services}">
+                    <td th:text="${s.name}"></td>
+                    <td th:text="${#strings.abbreviate(s.description, 60)}"></td>
+                    <td th:text="${s.basePrice != null ? '$' + s.basePrice : '-'}"></td>
+                    <td><span class="badge" th:classappend="${s.active} ? 'badge-approved' : 'badge-rejected'" th:text="${s.active} ? 'Yes' : 'No'"></span></td>
+                    <td>
+                        <form th:action="@{/admin/services/{id}/toggle(id=${s.id})}" method="post">
+                            <button class="btn btn-secondary btn-sm" th:text="${s.active} ? 'Deactivate' : 'Activate'"></button>
+                        </form>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </main>
+</div>
+</body>
+</html>

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments/layout :: head('Manage Elderly')}"></head>
+<body>
+<div class="dashboard-layout">
+    <aside th:replace="~{fragments/admin-sidebar :: sidebar}"></aside>
+    <main class="main-content">
+        <div class="topbar"><h1>Manage Elderly Users</h1></div>
+        <div class="table-wrap">
+            <table>
+                <thead><tr><th>ID</th><th>Name</th><th>Email</th><th>Phone</th><th>Location</th><th>Status</th></tr></thead>
+                <tbody>
+                <tr th:each="u : ${users}">
+                    <td th:text="${u.id}"></td>
+                    <td th:text="${u.fullName}"></td>
+                    <td th:text="${u.email}"></td>
+                    <td th:text="${u.phone}"></td>
+                    <td th:text="${u.city}"></td>
+                    <td><span class="badge" th:classappend="${u.enabled} ? 'badge-approved' : 'badge-rejected'" th:text="${u.enabled} ? 'Active' : 'Inactive'"></span></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </main>
+</div>
+</body>
+</html>

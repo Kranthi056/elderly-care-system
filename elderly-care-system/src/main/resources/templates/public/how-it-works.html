@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments/layout :: head('How It Works')}"></head>
+<body>
+<nav th:replace="~{fragments/layout :: public-nav}"></nav>
+<section class="section">
+    <h1 class="section-title">How It Works</h1>
+    <p class="section-subtitle">A simple three-step journey to better elderly care.</p>
+    <div class="grid-3">
+        <div class="card step-card card-3d">
+            <div class="step-num">1</div>
+            <h3>Create Your Account</h3>
+            <p>Register as a family member or elderly user. Fill in basic details and medical preferences. Caregivers register and wait for verification.</p>
+        </div>
+        <div class="card step-card card-3d">
+            <div class="step-num">2</div>
+            <h3>Request or Accept Care</h3>
+            <p>Families browse services and submit requests. Administrators match verified caregivers based on skills, location, and availability.</p>
+        </div>
+        <div class="card step-card card-3d">
+            <div class="step-num">3</div>
+            <h3>Track & Communicate</h3>
+            <p>View schedules, receive care progress reports, message your caregiver, and stay informed every step of the way.</p>
+        </div>
+    </div>
+</section>
+<footer th:replace="~{fragments/layout :: footer}"></footer>
+</body>
+</html>

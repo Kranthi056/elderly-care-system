@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments/layout :: head('Home')}"></head>
+<body>
+<nav th:replace="~{fragments/layout :: public-nav}"></nav>
+
+<!-- Feature strip -->
+<div class="feature-strip">
+    <div class="feature-strip-item"><i class="fas fa-shield-alt"></i> Verified Caregivers</div>
+    <div class="feature-strip-item"><i class="fas fa-clock"></i> 24/7 Support Access</div>
+    <div class="feature-strip-item"><i class="fas fa-heart"></i> Family Peace of Mind</div>
+    <div class="feature-strip-item"><i class="fas fa-chart-line"></i> Real-time Progress</div>
+</div>
+
+<section class="hero">
+    <div class="hero-content fade-in">
+        <div class="hero-badge"><i class="fas fa-star"></i> Trusted Elderly Care Platform</div>
+        <h1>Compassionate Care for a <span>Better Tomorrow</span></h1>
+        <p>Connect with verified caregivers, manage care services, and keep your family informed — all in one simple, accessible platform designed for comfort, dignity, and peace of mind.</p>
+        <div class="btn-group">
+            <a th:href="@{/register}" class="btn btn-primary btn-lg"><i class="fas fa-rocket"></i> Get Started Free</a>
+            <a th:href="@{/services}" class="btn btn-secondary btn-lg"><i class="fas fa-search"></i> Explore Services</a>
+        </div>
+        <p style="margin-top:1.4rem;font-size:0.9rem;color:var(--text-muted);">
+            <i class="fas fa-check-circle" style="color:var(--primary);"></i> No credit card required &nbsp;·&nbsp;
+            <i class="fas fa-check-circle" style="color:var(--primary);"></i> Quick registration &nbsp;·&nbsp;
+            <i class="fas fa-check-circle" style="color:var(--primary);"></i> Secure & private
+        </p>
+    </div>
+    <div class="hero-image fade-in delay-1">
+        <i class="fas fa-hands-helping"></i>
+        <div class="hero-img-title">Care That Feels Like Family</div>
+        <div class="hero-img-sub">Matching elderly needs with trusted professionals</div>
+    </div>
+</section>
+
+<section class="section">
+    <h2 class="section-title">Our Care Services</h2>
+    <p class="section-subtitle">Professional support tailored to the unique needs of every elderly individual — from daily assistance to specialized health monitoring.</p>
+    <div class="grid-3">
+        <div class="card card-3d service-card fade-in" th:each="s, iter : ${services}" th:classappend="'delay-' + ${iter.index % 3}">
+            <div class="icon-wrap"><i th:class="'fas ' + ${s.iconClass}"></i></div>
+            <h3 th:text="${s.name}">Service</h3>
+            <p th:text="${s.description}">Description</p>
+            <p th:if="${s.basePrice}" style="font-weight:700;color:var(--primary);margin-bottom:0.9rem;">From $<span th:text="${#numbers.formatDecimal(s.basePrice,1,0)}"></span>/visit</p>
+            <a th:href="@{/register}" class="btn btn-secondary btn-sm">Request This Service</a>
+        </div>
+    </div>
+</section>
+
+<section class="section-alt">
+    <div class="section-inner">
+        <h2 class="section-title">How ElderCare Works</h2>
+        <p class="section-subtitle">Getting quality care for your loved ones is simple, transparent, and guided every step of the way.</p>
+        <div class="grid-3">
+            <div class="card step-card card-3d">
+                <div class="step-num">1</div>
+                <h3>Create Your Account</h3>
+                <p class="text-muted">Register as a family member or elderly user in minutes. Share care preferences and medical notes securely.</p>
+            </div>
+            <div class="card step-card card-3d">
+                <div class="step-num">2</div>
+                <h3>Request Care</h3>
+                <p class="text-muted">Browse services, pick a preferred date and time, and submit a request. Our team matches a verified caregiver.</p>
+            </div>
+            <div class="card step-card card-3d">
+                <div class="step-num">3</div>
+                <h3>Track & Stay Connected</h3>
+                <p class="text-muted">View schedules, receive progress reports, message your caregiver, and keep the whole family informed.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="section">
+    <h2 class="section-title">Why Families Choose ElderCare</h2>
+    <p class="section-subtitle">Built for trust, clarity, and the real needs of ageing parents and their children.</p>
+    <div class="grid-4">
+        <div class="card text-center">
+            <i class="fas fa-user-check" style="font-size:2.1rem;color:var(--primary);margin-bottom:0.9rem;"></i>
+            <h3 style="font-size:1.1rem;">Verified Caregivers</h3>
+            <p class="text-muted" style="font-size:0.9rem;">Every caregiver is reviewed for qualifications, experience, and reliability before approval.</p>
+        </div>
+        <div class="card text-center">
+            <i class="fas fa-comments" style="font-size:2.1rem;color:var(--primary);margin-bottom:0.9rem;"></i>
+            <h3 style="font-size:1.1rem;">Easy Communication</h3>
+            <p class="text-muted" style="font-size:0.9rem;">Message caregivers and stay updated without endless phone calls or scattered notes.</p>
+        </div>
+        <div class="card text-center">
+            <i class="fas fa-file-medical-alt" style="font-size:2.1rem;color:var(--primary);margin-bottom:0.9rem;"></i>
+            <h3 style="font-size:1.1rem;">Progress Tracking</h3>
+            <p class="text-muted" style="font-size:0.9rem;">Daily care reports and activity updates so you always know how your loved one is doing.</p>
+        </div>
+        <div class="card text-center">
+            <i class="fas fa-lock" style="font-size:2.1rem;color:var(--primary);margin-bottom:0.9rem;"></i>
+            <h3 style="font-size:1.1rem;">Private & Secure</h3>
+            <p class="text-muted" style="font-size:0.9rem;">Medical details and personal information are protected and shared only with authorized users.</p>
+        </div>
+    </div>
+</section>
+
+<section class="section-alt">
+    <div class="section-inner">
+        <h2 class="section-title">What Families Say</h2>
+        <p class="section-subtitle">Real experiences from people who use ElderCare to support their parents and grandparents.</p>
+        <div class="grid-3">
+            <div class="card testimonial-card">
+                <div class="quote">“</div>
+                <div class="stars">★★★★★</div>
+                <p>Finding reliable help for my mother was stressful until we tried ElderCare. The caregiver was kind, punctual, and the progress reports gave us real peace of mind.</p>
+                <div class="testimonial-author">
+                    <div class="avatar">R</div>
+                    <div>
+                        <strong>Robert T.</strong><br>
+                        <span class="text-muted" style="font-size:0.85rem;">Son of Margaret, Springfield</span>
+                    </div>
+                </div>
+            </div>
+            <div class="card testimonial-card">
+                <div class="quote">“</div>
+                <div class="stars">★★★★★</div>
+                <p>As a caregiver, the platform makes my schedule clear and communication simple. Families appreciate the daily notes, and I feel supported by the verification process.</p>
+                <div class="testimonial-author">
+                    <div class="avatar">S</div>
+                    <div>
+                        <strong>Sarah M.</strong><br>
+                        <span class="text-muted" style="font-size:0.85rem;">Certified Caregiver</span>
+                    </div>
+                </div>
+            </div>
+            <div class="card testimonial-card">
+                <div class="quote">“</div>
+                <div class="stars">★★★★☆</div>
+                <p>The request process was straightforward. We needed medication help and mobility support — both were arranged quickly and the caregiver matched our preferences.</p>
+                <div class="testimonial-author">
+                    <div class="avatar">S</div>
+                    <div>
+                        <strong>Susan W.</strong><br>
+                        <span class="text-muted" style="font-size:0.85rem;">Daughter of James, Springfield</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="section" style="text-align:center;">
+    <h2 class="section-title">Ready to Get Started?</h2>
+    <p class="section-subtitle">Join families and caregivers who trust ElderCare for organized, compassionate support.</p>
+    <div class="btn-group" style="justify-content:center;">
+        <a th:href="@{/register/elderly}" class="btn btn-primary btn-lg"><i class="fas fa-user-friends"></i> Register as Family</a>
+        <a th:href="@{/register/caregiver}" class="btn btn-secondary btn-lg"><i class="fas fa-user-nurse"></i> Become a Caregiver</a>
+    </div>
+</section>
+
+<footer th:replace="~{fragments/layout :: footer}"></footer>
+</body>
+</html>

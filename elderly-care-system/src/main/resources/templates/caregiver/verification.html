@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments/layout :: head('Verification Status')}"></head>
+<body>
+<div class="dashboard-layout">
+    <aside th:replace="~{fragments/caregiver-sidebar :: sidebar}"></aside>
+    <main class="main-content">
+        <div class="topbar"><h1>Verification Status</h1></div>
+        <div class="card" style="max-width:500px;" th:if="${profile != null}">
+            <p>Status: <span class="badge" th:classappend="'badge-' + ${#strings.toLowerCase(profile.verificationStatus.name())}" th:text="${profile.verificationStatus}"></span></p>
+            <p th:if="${profile.adminRemarks}" style="margin-top:1rem;"><strong>Admin Remarks:</strong> <span th:text="${profile.adminRemarks}"></span></p>
+            <p th:if="${profile.verificationStatus.name() == 'PENDING'}" style="margin-top:1rem;color:var(--text-muted);">Your application is under review. You will be notified once a decision is made.</p>
+            <p th:if="${profile.verificationStatus.name() == 'APPROVED'}" style="margin-top:1rem;color:var(--success);">You are approved and can accept care assignments!</p>
+        </div>
+    </main>
+</div>
+</body>
+</html>

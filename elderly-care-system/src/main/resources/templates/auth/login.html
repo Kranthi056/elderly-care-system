@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments/layout :: head('Login')}"></head>
+<body>
+<div class="auth-page">
+    <div class="auth-card">
+        <div class="logo"><i class="fas fa-hand-holding-heart"></i></div>
+        <h2>Welcome Back</h2>
+        <p class="subtitle">Sign in to manage care, track progress, and stay connected</p>
+
+        <div th:if="${error}" class="alert alert-error"><i class="fas fa-exclamation-circle"></i> <span th:text="${error}"></span></div>
+        <div th:if="${message}" class="alert alert-success"><i class="fas fa-check-circle"></i> <span th:text="${message}"></span></div>
+
+        <form th:action="@{/login}" method="post">
+            <div class="form-group">
+                <label class="required">Email Address</label>
+                <input type="email" name="username" class="form-control" placeholder="your@email.com" required autofocus>
+            </div>
+            <div class="form-group">
+                <label class="required">Password</label>
+                <input type="password" name="password" class="form-control" placeholder="••••••••" required>
+            </div>
+            <div class="form-group" style="display:flex;justify-content:space-between;align-items:center;">
+                <label style="font-weight:500;margin:0;"><input type="checkbox" name="remember-me"> Remember me</label>
+            </div>
+            <button type="submit" class="btn btn-primary w-100 btn-lg"><i class="fas fa-sign-in-alt"></i> Login</button>
+        </form>
+        <div class="auth-footer">
+            Don't have an account? <a th:href="@{/register}"><strong>Register here</strong></a>
+        </div>
+        <div class="demo-box">
+            <strong><i class="fas fa-key"></i> Demo Credentials (for testing)</strong><br>
+            <strong>Admin:</strong> admin@elderlycare.com / admin123<br>
+            <strong>Elderly:</strong> margaret@example.com / elderly123<br>
+            <strong>Caregiver:</strong> sarah.care@example.com / caregiver123
+        </div>
+    </div>
+</div>
+</body>
+</html>

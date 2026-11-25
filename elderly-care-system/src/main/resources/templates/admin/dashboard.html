@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments/layout :: head('Admin Dashboard')}"></head>
+<body>
+<div class="dashboard-layout">
+    <aside th:replace="~{fragments/admin-sidebar :: sidebar}"></aside>
+    <main class="main-content">
+        <div class="topbar">
+            <div>
+                <h1>Admin Dashboard</h1>
+                <div class="breadcrumb">System overview — users, requests & care activity</div>
+            </div>
+            <a th:href="@{/admin/requests}" class="btn btn-primary btn-sm"><i class="fas fa-clipboard-list"></i> Manage Requests</a>
+        </div>
+        <div class="grid-4 mb-3">
+            <div class="stat-card"><i class="fas fa-users"></i><div class="stat-value" th:text="${totalElderly}">0</div><div class="stat-label">Elderly Users</div></div>
+            <div class="stat-card" style="border-left-color:var(--info);"><div class="stat-value" th:text="${totalCaregivers}">0</div><div class="stat-label">Caregivers</div></div>
+            <div class="stat-card" style="border-left-color:var(--warning);"><div class="stat-value" th:text="${pendingApprovals}">0</div><div class="stat-label">Pending Approvals</div></div>
+            <div class="stat-card" style="border-left-color:var(--secondary);"><div class="stat-value" th:text="${totalRequests}">0</div><div class="stat-label">Total Requests</div></div>
+            <div class="stat-card" style="border-left-color:var(--accent);"><div class="stat-value" th:text="${pendingRequests}">0</div><div class="stat-label">Pending Requests</div></div>
+            <div class="stat-card" style="border-left-color:var(--primary);"><div class="stat-value" th:text="${activeAssignments}">0</div><div class="stat-label">Active Assignments</div></div>
+            <div class="stat-card" style="border-left-color:var(--success);"><div class="stat-value" th:text="${completedServices}">0</div><div class="stat-label">Completed Services</div></div>
+        </div>
+        <div class="card">
+            <div class="d-flex justify-between align-center mb-2">
+                <h3>Recent Service Requests</h3>
+                <a th:href="@{/admin/requests}" style="font-size:0.85rem;">View all</a>
+            </div>
+            <div class="table-wrap" style="box-shadow:none;border:none;">
+                <table>
+                    <thead><tr><th>ID</th><th>User</th><th>Service</th><th>Date</th><th>Status</th></tr></thead>
+                    <tbody>
+                    <tr th:each="r : ${recentRequests}">
+                        <td th:text="${r.id}"></td>
+                        <td th:text="${r.elderlyUser.fullName}"></td>
+                        <td th:text="${r.service.name}"></td>
+                        <td th:text="${r.preferredDate}"></td>
+                        <td><span class="badge" th:classappend="'badge-' + ${#strings.toLowerCase(r.status.name())}" th:text="${r.status}"></span></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </main>
+</div>
+</body>
+</html>
